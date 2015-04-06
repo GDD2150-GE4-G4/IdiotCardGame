@@ -19,21 +19,31 @@ namespace Assets.Scripts
         {
             Utility.Initialize();
 
-            do
+            while (Cards.Count < startCount)
             {
                 Card card = new Card();
 
                 if (Cards.Count(c => c == card) < 4)
+                {
                     Cards.Push(card);
+                }
             }
-            while (Cards.Count < startCount);
 
-            SetThickness();
-            
-            if (isFaceUp)
-                transform.FindChild("Top").GetComponent<Renderer>().material = Cards.Peek().GetMaterial();
+            Shuffle(5);
 
-            isEmpty = Cards.Count <= 0;
+            var cards = Cards.ToList<Card>();
+            cards.Sort();
+
+            foreach (Card c in cards)
+                Debug.Log(c.ToString());
+
+            if (startCount > 0)
+            {
+                SetThickness();
+
+                if (isFaceUp)
+                    transform.FindChild("Top").GetComponent<Renderer>().material = Cards.Peek().GetMaterial();
+            }
         }
 
         void Update()
@@ -58,10 +68,30 @@ namespace Assets.Scripts
                 isEmpty = false;
             }
 
-            SetThickness();
+            if (!isEmpty)
+            {
+                SetThickness();
 
-            if (isFaceUp)
-                transform.FindChild("Top").GetComponent<Renderer>().material = Cards.Peek().GetMaterial();
+                if (isFaceUp)
+                    transform.FindChild("Top").GetComponent<Renderer>().material = Cards.Peek().GetMaterial();
+            }
+        }
+
+        void Shuffle(int iterations = 1)
+        {
+            for (int i = 0; i < iterations; i++)
+            {
+                var cards = Cards.ToList<Card>();
+
+                Cards.Clear();
+
+                for (int j = cards.Count; j > 0; j--)
+                {
+                    int k = UnityEngine.Random.Range(0, j);
+                    Cards.Push(cards[k]);
+                    cards.RemoveAt(k);
+                }
+            }
         }
 
         void SetThickness()

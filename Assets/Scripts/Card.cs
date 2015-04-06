@@ -108,5 +108,48 @@ namespace Assets.Scripts
         {
             return (Effect != SpecialCard.None) || (CompareTo(other) >= 0);
         }
+        public static bool operator ==(Card c1, Card c2)
+        {
+            return c1.Equals(c2);
+        }
+        public static bool operator !=(Card c1, Card c2)
+        {
+            return !c1.Equals(c2);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Card)
+                return Equals(obj as Card);
+            else
+                return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Rank;
+        }
+
+        public override string ToString()
+        {
+            if (Effect != SpecialCard.None)
+                return Effect.ToString();
+            else if (Rank < 11)
+                return Rank.ToString();
+            else
+                switch(Rank)
+                {
+                    case 11:
+                        return "Jack";
+                    case 12:
+                        return "Queen";
+                    case 13:
+                        return "King";
+                    case 14:
+                        return "Ace";
+                    default:
+                        return "Unknown";
+                }
+        }
     }
 }
