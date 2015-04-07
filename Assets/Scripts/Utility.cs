@@ -29,6 +29,7 @@ namespace Assets.Scripts
                 MaterialsDict.Add("jack", Resources.Load<Material>("Materials/CardFront/CardFrontJack"));
                 MaterialsDict.Add("queen", Resources.Load<Material>("Materials/CardFront/CardFrontQueen"));
                 MaterialsDict.Add("king", Resources.Load<Material>("Materials/CardFront/CardFrontKing"));
+                MaterialsDict.Add("back", Resources.Load<Material>("Materials/CardBack/CardBack"));
 
                 initialized = true;
             }

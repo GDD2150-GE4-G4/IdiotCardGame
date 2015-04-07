@@ -29,13 +29,7 @@ namespace Assets.Scripts
                 }
             }
 
-            Shuffle(5);
-
-            var cards = Cards.ToList<Card>();
-            cards.Sort();
-
-            foreach (Card c in cards)
-                Debug.Log(c.ToString());
+            Shuffle();
 
             if (startCount > 0)
             {
@@ -43,6 +37,9 @@ namespace Assets.Scripts
 
                 if (isFaceUp)
                     transform.FindChild("Top").GetComponent<Renderer>().material = Cards.Peek().GetMaterial();
+                else
+                    transform.FindChild("Top").GetComponent<Renderer>().material = Utility.MaterialsDict["back"];
+
             }
         }
 
@@ -74,6 +71,8 @@ namespace Assets.Scripts
 
                 if (isFaceUp)
                     transform.FindChild("Top").GetComponent<Renderer>().material = Cards.Peek().GetMaterial();
+                else
+                    transform.FindChild("Top").GetComponent<Renderer>().material = Utility.MaterialsDict["back"];
             }
         }
 
@@ -94,6 +93,17 @@ namespace Assets.Scripts
             }
         }
 
+        public void DealCard(Deck destination)
+        {
+            if (Cards.Count > 0)
+                destination.AddCard(Cards.Pop());
+        }
+
+        public virtual Card DrawCard()
+        {
+            return Cards.Pop();
+        }
+
         void SetThickness()
         {
             transform.localScale = new Vector3(.25f, Cards.Count / (float)Utility.MAX_DECK_SIZE, .25f);
@@ -104,12 +114,9 @@ namespace Assets.Scripts
             Cards.Push(card);
         }
 
-        void OnMouseDown()
+        virtual protected void OnMouseDown()
         {
-            if (discardPile && Cards.Count > 0)
-            {
-                discardPile.AddCard(Cards.Pop());
-            }
+            DealCard(discardPile);
         }
     }
 }
