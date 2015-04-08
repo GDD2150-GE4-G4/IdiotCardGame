@@ -108,10 +108,12 @@ namespace Assets.Scripts
         {
             return (Effect != SpecialCard.None) || (CompareTo(other) >= 0);
         }
+
         public static bool operator ==(Card c1, Card c2)
         {
             return c1.Equals(c2);
         }
+
         public static bool operator !=(Card c1, Card c2)
         {
             return !c1.Equals(c2);

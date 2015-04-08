@@ -17,7 +17,10 @@ namespace Assets.Scripts
         {
             get
             {
-                return Cards.Peek();
+                if (Cards.Count > 0)
+                    return Cards.Peek();
+                else
+                    return null;
             }
         }
 
@@ -104,14 +107,20 @@ namespace Assets.Scripts
         {
             if (Cards.Count > 0)
                 destination.AddCard(Cards.Pop());
+
+            SetThickness();
         }
 
         public virtual Card DrawCard()
         {
-            if (Cards.Count > 0)
-                return Cards.Pop();
-            else
-                return null;
+            Card retCard = null;
+
+            if (Cards.Count > 0)            
+                retCard = Cards.Pop();
+
+            SetThickness();
+
+            return retCard;
         }
 
         void SetThickness()

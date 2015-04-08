@@ -125,5 +125,17 @@ namespace Assets.Scripts
             if (Cards.Count > 0)
                 DiscardPile.AddCard(DrawCard());
         }
+
+        void Update()
+        {
+            if (Cards.Count > 0 && dealStage > 18)
+            {
+                if (Player1_Hand.GetComponent<Hand>().Count < 3)
+                    Player1_Hand.GetComponent<Hand>().AddCard(DrawCard());
+
+                if (Player2_Hand.GetComponent<Hand>().Count < 3)
+                    Player2_Hand.GetComponent<Hand>().AddCard(DrawCard());
+            }
+        }
     }
 }

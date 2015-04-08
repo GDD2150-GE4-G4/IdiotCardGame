@@ -29,10 +29,11 @@ namespace Assets.Scripts
 
         void OnMouseUpAsButton()
         {
-            if (card.CanBePlayed(transform.parent.GetComponent<Hand>().discardPile.TopCard))
+            Hand hand = transform.parent.GetComponent<Hand>();
+            if (card.CanBePlayed(hand.discardPile.TopCard))
             {
-                transform.parent.GetComponent<Hand>().discardPile.AddCard(card);
-                Destroy(this.gameObject);
+                hand.discardPile.AddCard(card);
+                Destroy(hand.RemoveCard(card));
             }
         }
     }

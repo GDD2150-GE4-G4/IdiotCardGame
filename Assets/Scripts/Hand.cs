@@ -8,13 +8,22 @@ namespace Assets.Scripts
 {
     class Hand : Deck
     {
-        private List<KeyValuePair<GameObject, Card>> Cards = new List<KeyValuePair<GameObject, Card>>();
+        new private List<KeyValuePair<GameObject, Card>> Cards = new List<KeyValuePair<GameObject, Card>>();
         public GameObject cardPrefab;
 
         public Deck discardPile;
+        public Deck drawPile;
 
         private const float HAND_MAX_WIDTH = 5.25f;
         private const float CARD_WIDTH = 0.625f;
+
+        public int Count
+        {
+            get
+            {
+                return Cards.Count;
+            }
+        }
 
         public override void AddCard(Card card)
         {
@@ -53,6 +62,15 @@ namespace Assets.Scripts
 
                 obj.transform.position = pos;
             }
+        }
+
+        public GameObject RemoveCard(Card card)
+        {
+            var kvp = Cards.FirstOrDefault(c => c.Value == card);
+
+            Cards.Remove(kvp);
+
+            return kvp.Key;
         }
     }
 }
