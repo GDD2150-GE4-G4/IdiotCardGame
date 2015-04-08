@@ -101,7 +101,7 @@ namespace Assets.Scripts
 
         public bool Equals(Card other)
         {
-            return CompareTo(other) == 0;
+            return Equals(other as object);
         }
 
         public bool CanBePlayed(Card other)
@@ -120,7 +120,7 @@ namespace Assets.Scripts
         public override bool Equals(object obj)
         {
             if (obj is Card)
-                return Equals(obj as Card);
+                return CompareTo(obj as Card) == 0;
             else
                 return false;
         }

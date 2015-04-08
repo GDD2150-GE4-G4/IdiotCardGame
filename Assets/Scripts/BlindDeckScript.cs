@@ -13,10 +13,9 @@ namespace Assets.Scripts
             return base.DrawCard();
         }
 
-        override protected void OnMouseDown()
+        protected void OnMouseDown()
         {
-            isFaceUp = false;
-            base.OnMouseDown();
+            DrawCard();
         }
     }
 }

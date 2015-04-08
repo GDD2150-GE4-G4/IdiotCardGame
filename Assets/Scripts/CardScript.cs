@@ -9,8 +9,7 @@ namespace Assets.Scripts
     class CardScript : MonoBehaviour
     {
         private Card card;
-
-        public Card Card 
+        public Card Card
         {
             get
             {
@@ -19,24 +18,13 @@ namespace Assets.Scripts
             set
             {
                 card = value;
-
-                var renderers = GetComponentsInChildren<MeshRenderer>();
-
-                foreach (var renderer in renderers)
-                    renderer.enabled = true;
             }
-        }
-
-        void Awake()
-        {            
-            var renderers = GetComponentsInChildren<MeshRenderer>();
-
-            foreach (var renderer in renderers)
-                renderer.enabled = false;
         }
 
         void Update()
         {
+            if (card != null)
+                transform.FindChild("Front").GetComponent<Renderer>().material = card.GetMaterial();
         }
     }
 }

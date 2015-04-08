@@ -16,6 +16,11 @@ namespace Assets.Scripts
         public Deck Blind_p2_2;
         public Deck Blind_p2_3;
 
+        public Hand Player1_Hand;
+        public Hand Player2_Hand;
+
+        public Deck DiscardPile;
+
         private int dealStage = 0;
 
         void Start()
@@ -81,10 +86,44 @@ namespace Assets.Scripts
                     Blind_p2_3.isFaceUp = true;
                     dealStage++;
                     break;
+                case 12:
+                    Player1_Hand.AddCard(DrawCard());
+                    dealStage++;
+                    break;
+                case 13:
+                    Player2_Hand.AddCard(DrawCard());
+                    dealStage++;
+                    break;
+                case 14:
+                    Player1_Hand.AddCard(DrawCard());
+                    dealStage++;
+                    break;
+                case 15:
+                    Player2_Hand.AddCard(DrawCard());
+                    dealStage++;
+                    break;
+                case 16:
+                    Player1_Hand.AddCard(DrawCard());
+                    dealStage++;
+                    break;
+                case 17:
+                    Player2_Hand.AddCard(DrawCard());
+                    dealStage++;
+                    break;
+                case 18:
+                    DiscardPile.AddCard(DrawCard());
+                    dealStage++;
+                    break;
                 default:
                     CancelInvoke("Deal");
                     break;
 	        }
+        }
+    
+        void OnMouseDown()
+        {
+            if (Cards.Count > 0)
+                DiscardPile.AddCard(DrawCard());
         }
     }
 }

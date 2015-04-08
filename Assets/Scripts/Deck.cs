@@ -7,10 +7,9 @@ namespace Assets.Scripts
     public class Deck : MonoBehaviour
     {
         public byte startCount;
-        public Deck discardPile;
         public bool isFaceUp = false;
 
-        private Stack<Card> Cards = new Stack<Card>();
+        protected Stack<Card> Cards = new Stack<Card>();
 
         private bool isEmpty;
 
@@ -69,7 +68,7 @@ namespace Assets.Scripts
             {
                 SetThickness();
 
-                if (isFaceUp)
+                if (isFaceUp && Cards.Count > 0)
                     transform.FindChild("Top").GetComponent<Renderer>().material = Cards.Peek().GetMaterial();
                 else
                     transform.FindChild("Top").GetComponent<Renderer>().material = Utility.MaterialsDict["back"];
@@ -101,7 +100,10 @@ namespace Assets.Scripts
 
         public virtual Card DrawCard()
         {
-            return Cards.Pop();
+            if (Cards.Count > 0)
+                return Cards.Pop();
+            else
+                return null;
         }
 
         void SetThickness()
@@ -109,14 +111,9 @@ namespace Assets.Scripts
             transform.localScale = new Vector3(.25f, Cards.Count / (float)Utility.MAX_DECK_SIZE, .25f);
         }
 
-        public void AddCard(Card card)
+        virtual public void AddCard(Card card)
         {
             Cards.Push(card);
-        }
-
-        virtual protected void OnMouseDown()
-        {
-            DealCard(discardPile);
         }
     }
 }
