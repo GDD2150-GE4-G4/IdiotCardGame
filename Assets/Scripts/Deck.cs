@@ -13,6 +13,14 @@ namespace Assets.Scripts
 
         private bool isEmpty;
 
+        public Card TopCard
+        {
+            get
+            {
+                return Cards.Peek();
+            }
+        }
+
         // Use this for initialization
         void Awake()
         {

@@ -26,5 +26,14 @@ namespace Assets.Scripts
             if (card != null)
                 transform.FindChild("Front").GetComponent<Renderer>().material = card.GetMaterial();
         }
+
+        void OnMouseUpAsButton()
+        {
+            if (card.CanBePlayed(transform.parent.GetComponent<Hand>().discardPile.TopCard))
+            {
+                transform.parent.GetComponent<Hand>().discardPile.AddCard(card);
+                Destroy(this.gameObject);
+            }
+        }
     }
 }
