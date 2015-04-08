@@ -106,17 +106,46 @@ namespace Assets.Scripts
 
         public bool CanBePlayed(Card other)
         {
-            return (Effect != SpecialCard.None) || (CompareTo(other) >= 0);
+            if (other == null)
+                return true;
+
+            if (Effect != SpecialCard.None)
+                return true;
+
+            if (other.Effect == SpecialCard.Reverse)
+                return this <= other;
+
+            return this >= other;
         }
 
         public static bool operator ==(Card c1, Card c2)
         {
-            return c1.Equals(c2);
+            return Equals(c1, c2);
         }
 
         public static bool operator !=(Card c1, Card c2)
         {
-            return !c1.Equals(c2);
+            return !Equals(c1, c2);
+        }
+
+        public static bool operator >(Card c1, Card c2)
+        {
+            return c1.CompareTo(c2) >= 1;
+        }
+
+        public static bool operator >=(Card c1, Card c2)
+        {
+            return c1.CompareTo(c2) >= 0;
+        }
+
+        public static bool operator <(Card c1, Card c2)
+        {
+            return c1.CompareTo(c2) <= -1;
+        }
+
+        public static bool operator <=(Card c1, Card c2)
+        {
+            return c1.CompareTo(c2) <= 0;
         }
 
         public override bool Equals(object obj)

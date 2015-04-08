@@ -33,57 +33,63 @@ namespace Assets.Scripts
             switch (dealStage)
 	        {
                 case 0:
+                    Blind_p1_1.isFaceUp = false;
                     Blind_p1_1.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 1:
+                    Blind_p2_1.isFaceUp = false;
                     Blind_p2_1.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 2:
+                    Blind_p1_2.isFaceUp = false;
                     Blind_p1_2.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 3:
+                    Blind_p2_2.isFaceUp = false;
                     Blind_p2_2.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 4:
+                    Blind_p1_3.isFaceUp = false;
                     Blind_p1_3.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 5:
+                    Blind_p2_3.isFaceUp = false;
                     Blind_p2_3.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 6:
-                    Blind_p1_1.AddCard(DrawCard());
                     Blind_p1_1.isFaceUp = true;
+                    Blind_p1_1.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 7:
-                    Blind_p2_1.AddCard(DrawCard());
                     Blind_p2_1.isFaceUp = true;
+                    Blind_p2_1.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 8:
-                    Blind_p1_2.AddCard(DrawCard());
                     Blind_p1_2.isFaceUp = true;
+                    Blind_p1_2.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 9:
-                    Blind_p2_2.AddCard(DrawCard());
                     Blind_p2_2.isFaceUp = true;
+                    Blind_p2_2.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 10:
-                    Blind_p1_3.AddCard(DrawCard());
                     Blind_p1_3.isFaceUp = true;
+                    Blind_p1_3.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 11:
-                    Blind_p2_3.AddCard(DrawCard());
                     Blind_p2_3.isFaceUp = true;
+                    Blind_p2_3.AddCard(DrawCard());
                     dealStage++;
                     break;
                 case 12:

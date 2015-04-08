@@ -33,6 +33,7 @@ namespace Assets.Scripts
             if (card.CanBePlayed(hand.discardPile.TopCard))
             {
                 hand.discardPile.AddCard(card);
+
                 Destroy(hand.RemoveCard(card));
             }
         }

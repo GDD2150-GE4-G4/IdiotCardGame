@@ -11,7 +11,7 @@ namespace Assets.Scripts
 
         protected Stack<Card> Cards = new Stack<Card>();
 
-        private bool isEmpty;
+        private bool isEmpty = true;
 
         public Card TopCard
         {
@@ -53,7 +53,7 @@ namespace Assets.Scripts
             }
         }
 
-        void Update()
+        void UpdateRendering()
         {
             if (Cards.Count <= 0 && !isEmpty)
             {
@@ -106,9 +106,7 @@ namespace Assets.Scripts
         public void DealCard(Deck destination)
         {
             if (Cards.Count > 0)
-                destination.AddCard(Cards.Pop());
-
-            SetThickness();
+                destination.AddCard(DrawCard());
         }
 
         public virtual Card DrawCard()
@@ -118,19 +116,26 @@ namespace Assets.Scripts
             if (Cards.Count > 0)            
                 retCard = Cards.Pop();
 
-            SetThickness();
+            UpdateRendering();
 
             return retCard;
         }
 
-        void SetThickness()
+        virtual protected void SetThickness()
         {
             transform.localScale = new Vector3(.25f, Cards.Count / (float)Utility.MAX_DECK_SIZE, .25f);
+
+            var pos = transform.position;
+
+            pos.y = 7.51f + gameObject.GetComponent<BoxCollider>().bounds.extents.y;
+
+            transform.position = pos;
         }
 
         virtual public void AddCard(Card card)
         {
             Cards.Push(card);
+            UpdateRendering();
         }
     }
 }

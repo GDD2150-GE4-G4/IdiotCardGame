@@ -72,5 +72,9 @@ namespace Assets.Scripts
 
             return kvp.Key;
         }
+
+        protected override void SetThickness()
+        {
+        }
     }
 }
