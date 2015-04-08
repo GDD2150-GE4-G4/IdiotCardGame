@@ -120,7 +120,7 @@ namespace Assets.Scripts
 	        }
         }
     
-        void OnMouseDown()
+        void OnMouseUpAsButton()
         {
             if (Cards.Count > 0)
                 DiscardPile.AddCard(DrawCard());

@@ -13,7 +13,7 @@ namespace Assets.Scripts
             return base.DrawCard();
         }
 
-        protected void OnMouseDown()
+        protected void OnMouseUpAsButton()
         {
             DrawCard();
         }
