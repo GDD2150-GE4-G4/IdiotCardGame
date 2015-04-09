@@ -31,6 +31,7 @@ namespace Assets.Scripts
             kvp.Key.transform.parent = transform;
             kvp.Key.GetComponent<CardScript>().Card = kvp.Value;
             Cards.Add(kvp);
+            kvp.Key.GetComponent<CardScript>().hand = this;
             UpdatePositioning();
         }
 

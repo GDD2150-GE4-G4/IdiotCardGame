@@ -8,33 +8,22 @@ namespace Assets.Scripts
 {
     class CardScript : MonoBehaviour
     {
-        private Card card;
-        public Card Card
-        {
-            get
-            {
-                return card;
-            }
-            set
-            {
-                card = value;
-            }
-        }
+        public Card Card { get; set; }
+        public Hand hand;
 
         void Update()
         {
-            if (card != null)
-                transform.FindChild("Front").GetComponent<Renderer>().material = card.GetMaterial();
+            if (Card != null)
+                transform.FindChild("Front").GetComponent<Renderer>().material = Card.GetMaterial();
         }
 
         void OnMouseUpAsButton()
         {
-            Hand hand = transform.parent.GetComponent<Hand>();
-            if (card.CanBePlayed(hand.discardPile.TopCard))
+            if (Card.CanBePlayed(hand.discardPile.TopCard))
             {
-                hand.discardPile.AddCard(card);
+                hand.discardPile.AddCard(Card);
 
-                Destroy(hand.RemoveCard(card));
+                Destroy(hand.RemoveCard(Card));
             }
         }
     }
