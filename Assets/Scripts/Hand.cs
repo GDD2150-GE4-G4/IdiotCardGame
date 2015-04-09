@@ -57,7 +57,7 @@ namespace Assets.Scripts
                 Vector3 pos = obj.transform.position;
                 int i = Cards.IndexOf(kvp);
 
-                pos.y = transform.position.y + i/100.0f;
+                pos.y = transform.position.y + i/1000.0f;
                 pos.x = -(width / 2) + i*CARD_WIDTH + i*gutter + CARD_WIDTH/2;
 
                 obj.transform.position = pos;
