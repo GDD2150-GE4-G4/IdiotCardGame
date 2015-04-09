@@ -10,5 +10,6 @@ namespace Assets.Scripts
     {
         public Hand Hand;
         public BlindDeckScript[] Blinds;
+        public DiscardDeckScript DiscardPile;
     }
 }

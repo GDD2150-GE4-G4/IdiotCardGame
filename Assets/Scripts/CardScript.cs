@@ -21,7 +21,7 @@ namespace Assets.Scripts
         {
             if (Card.CanBePlayed(hand.discardPile.TopCard))
             {
-                hand.discardPile.AddCard(Card);
+                hand.discardPile.PlayCard(Card, hand.player);
 
                 Destroy(hand.RemoveCard(Card));
             }

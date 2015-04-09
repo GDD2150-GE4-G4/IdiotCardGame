@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     class DiscardDeckScript : Deck
     {
-        public override void AddCard(Card card)
+        public void PlayCard(Card card, PlayerScript player)
         {
             base.AddCard(card);
 

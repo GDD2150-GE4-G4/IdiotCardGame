@@ -11,8 +11,9 @@ namespace Assets.Scripts
         new private List<KeyValuePair<GameObject, Card>> Cards = new List<KeyValuePair<GameObject, Card>>();
         public GameObject cardPrefab;
 
-        public Deck discardPile;
-        public Deck drawPile;
+        public DiscardDeckScript discardPile;
+        public DrawDeckScript drawPile;
+        public PlayerScript player;
 
         private const float HAND_MAX_WIDTH = 5.25f;
         private const float CARD_WIDTH = 0.625f;
