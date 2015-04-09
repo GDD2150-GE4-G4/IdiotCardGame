@@ -70,11 +70,9 @@ namespace Assets.Scripts
 
             Cards.Remove(kvp);
 
-            return kvp.Key;
-        }
+            UpdatePositioning();
 
-        protected override void SetThickness()
-        {
+            return kvp.Key;
         }
     }
 }

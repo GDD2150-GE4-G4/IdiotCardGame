@@ -133,9 +133,9 @@ namespace Assets.Scripts
                 Card old = DiscardPile.TopCard;
                 Card next = DrawCard();
 
-                DiscardPile.AddCard(DrawCard());
+                DiscardPile.AddCard(next);
 
-                if (!old.CanBePlayed(next))
+                if (old != null && !next.CanBePlayed(old))
                 {
                     while (DiscardPile.TopCard != null)
                         Player1_Hand.AddCard(DiscardPile.DrawCard());
