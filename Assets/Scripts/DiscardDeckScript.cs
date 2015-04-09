@@ -15,8 +15,6 @@ namespace Assets.Scripts
             {
                 while (Cards.Count > 0)
                     DrawCard();
-
-                base.AddCard(card);
             }
         }
     }

@@ -129,7 +129,20 @@ namespace Assets.Scripts
         void OnMouseUpAsButton()
         {
             if (Cards.Count > 0)
+            {
+                Card old = DiscardPile.TopCard;
+                Card next = DrawCard();
+
                 DiscardPile.AddCard(DrawCard());
+
+                if (!old.CanBePlayed(next))
+                {
+                    while (DiscardPile.TopCard != null)
+                        Player1_Hand.AddCard(DiscardPile.DrawCard());
+
+                    DiscardPile.AddCard(DrawCard());
+                }
+            }
         }
 
         void Update()
