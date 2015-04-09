@@ -6,6 +6,7 @@ namespace Assets.Scripts
 {
     public class Deck : MonoBehaviour
     {
+        public GameScript Game;
         public byte startCount;
         public bool isFaceUp = false;
 

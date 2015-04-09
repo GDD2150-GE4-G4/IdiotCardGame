@@ -6,10 +6,11 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class PlayerScript : MonoBehaviour
+    public class PlayerScript : MonoBehaviour
     {
         public Hand Hand;
         public BlindDeckScript[] Blinds;
         public DiscardDeckScript DiscardPile;
+        public int PlayerID;
     }
 }

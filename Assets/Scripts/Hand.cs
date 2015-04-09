@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class Hand : Deck
+    public class Hand : Deck
     {
         new private List<KeyValuePair<GameObject, Card>> Cards = new List<KeyValuePair<GameObject, Card>>();
         public GameObject cardPrefab;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts
 {
-    class BlindDeckScript : Deck
+    public class BlindDeckScript : Deck
     {
         public override Card DrawCard()
         {

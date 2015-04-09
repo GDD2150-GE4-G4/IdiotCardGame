@@ -43,11 +43,4 @@ namespace Assets.Scripts
         Reverse,
         Burn
     }
-
-    public enum Player
-    {
-        None,
-        PlayerOne,
-        PlayerTwo
-    }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class DrawDeckScript : Deck
+    public class DrawDeckScript : Deck
     {
         public Deck Blind_p1_1;
         public Deck Blind_p1_2;
@@ -19,13 +19,13 @@ namespace Assets.Scripts
         public Hand Player1_Hand;
         public Hand Player2_Hand;
 
-        public Deck DiscardPile;
+        public DiscardDeckScript DiscardPile;
 
         private int dealStage = 0;
 
         void Start()
         {
-            InvokeRepeating("Deal", 1, 0.2f);
+            InvokeRepeating("Deal", 0.2f, 0.2f);
         }
 
         void Deal()
@@ -116,10 +116,6 @@ namespace Assets.Scripts
                     Player2_Hand.AddCard(DrawCard());
                     dealStage++;
                     break;
-                case 18:
-                    DiscardPile.AddCard(DrawCard());
-                    dealStage++;
-                    break;
                 default:
                     CancelInvoke("Deal");
                     break;
@@ -130,30 +126,7 @@ namespace Assets.Scripts
         {
             if (Cards.Count > 0)
             {
-                Card old = DiscardPile.TopCard;
-                Card next = DrawCard();
-
-                DiscardPile.AddCard(next);
-
-                if (old != null && !next.CanBePlayed(old))
-                {
-                    while (DiscardPile.TopCard != null)
-                        Player1_Hand.AddCard(DiscardPile.DrawCard());
-
-                    DiscardPile.AddCard(DrawCard());
-                }
-            }
-        }
-
-        void Update()
-        {
-            if (Cards.Count > 0 && dealStage > 18)
-            {
-                if (Player1_Hand.GetComponent<Hand>().Count < 3)
-                    Player1_Hand.GetComponent<Hand>().AddCard(DrawCard());
-
-                if (Player2_Hand.GetComponent<Hand>().Count < 3)
-                    Player2_Hand.GetComponent<Hand>().AddCard(DrawCard());
+                DiscardPile.PlayCard(DrawCard(), Game.Players[Game.CurrentPlayer]);
             }
         }
     }
