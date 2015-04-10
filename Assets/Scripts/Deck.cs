@@ -9,6 +9,7 @@ namespace Assets.Scripts
         public GameScript Game;
         public byte startCount;
         public bool isFaceUp = false;
+        public GameObject DeckOf;
 
         protected Stack<Card> Cards = new Stack<Card>();
 
@@ -104,10 +105,17 @@ namespace Assets.Scripts
             }
         }
 
-        public void DealCard(Deck destination)
+        public void DealCard(Deck destination, CardScript.AfterMove dealFunction)
         {
-            if (Cards.Count > 0)
-                destination.AddCard(DrawCard());
+            var pos = transform.position;
+            var rot = transform.rotation;
+            rot.z += 180;
+            pos.y += gameObject.GetComponent<BoxCollider>().bounds.extents.y;
+
+            var cardObj = Instantiate(DeckOf, pos, rot) as GameObject;
+            cardObj.GetComponent<CardScript>().Card = DrawCard();
+
+            cardObj.GetComponent<CardScript>().DealTo(destination, dealFunction);
         }
 
         public virtual Card DrawCard()

@@ -20,8 +20,9 @@ namespace Assets.Scripts
                 CurrentPlayer = 0;
 
             foreach (PlayerScript player in Players)
-                while (DrawDeck.TopCard != null && player.Hand.Count < 3)
-                    player.Hand.AddCard(DrawDeck.DrawCard());
+                for (int i = player.Hand.Count; i < 3; i++ )
+                    if (DrawDeck.TopCard != null)
+                        DrawDeck.DealCard(player.Hand, player.Hand.AddCard);
         }
     }
 }

@@ -6,10 +6,17 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class CardScript : MonoBehaviour
+    public class CardScript : MonoBehaviour
     {
         public Card Card { get; set; }
         public Hand hand;
+        Vector3 initPos;
+        Deck Destination;
+        float t = 0;
+
+        public delegate void AfterMove(Card card);
+
+        AfterMove moveFunc;
 
         void Update()
         {
@@ -21,8 +28,32 @@ namespace Assets.Scripts
         {
             if (Card.CanBePlayed(hand.discardPile.TopCard))
             {
-                Destroy(hand.RemoveCard(Card));
-                hand.discardPile.PlayCard(Card, hand.player);
+                hand.RemoveCard(Card);
+                DealTo(hand.discardPile, hand.discardPile.PlayCard);
+            }
+        }
+
+        public void DealTo(Deck destination, AfterMove func)
+        {
+            Destination = destination;
+            initPos = transform.position;
+            moveFunc = func;
+            InvokeRepeating("MoveToDestination", 0.0f, 0.02f);
+        }
+
+        void MoveToDestination()
+        {
+            if (t <= 1)
+            {
+                transform.position = Vector3.Lerp(initPos, Destination.gameObject.transform.position, t);
+                t += 0.05f;
+            }
+            else
+            {
+                moveFunc.Invoke(Card);
+                t = 0;
+                CancelInvoke("MoveToDestination");
+                Destroy(gameObject);
             }
         }
     }

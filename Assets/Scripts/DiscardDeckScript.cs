@@ -7,8 +7,9 @@ namespace Assets.Scripts
 {
     public class DiscardDeckScript : Deck
     {
-        public void PlayCard(Card card, PlayerScript player)
+        public void PlayCard(Card card)
         {
+            PlayerScript player = Game.GetComponent<GameScript>().Players[Game.GetComponent<GameScript>().CurrentPlayer];
             Card old = TopCard;
             base.AddCard(card);
 
