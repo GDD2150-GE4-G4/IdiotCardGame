@@ -122,7 +122,7 @@ namespace Assets.Scripts
 	        }
         }
     
-        void OnMouseUpAsButton()
+        public void OnMouseUpAsButton()
         {
             if (Cards.Count > 0)
             {

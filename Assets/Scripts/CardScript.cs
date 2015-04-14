@@ -8,7 +8,7 @@ namespace Assets.Scripts
 {
     public class CardScript : MonoBehaviour
     {
-        public Card Card { get; set; }
+        public Card Card;
         public Hand hand;
         Vector3 initPos;
         Deck Destination;
@@ -24,9 +24,9 @@ namespace Assets.Scripts
                 transform.FindChild("Front").GetComponent<Renderer>().material = Card.GetMaterial();
         }
 
-        void OnMouseUpAsButton()
+        public void OnMouseUpAsButton()
         {
-            if (Card.CanBePlayed(hand.discardPile.TopCard))
+            if (hand.Game.CurrentPlayer == hand.player.PlayerID && Card.CanBePlayed(hand.discardPile.TopCard))
             {
                 hand.RemoveCard(Card);
                 DealTo(hand.discardPile, hand.discardPile.PlayCard);
@@ -50,9 +50,9 @@ namespace Assets.Scripts
             }
             else
             {
-                moveFunc.Invoke(Card);
                 t = 0;
                 CancelInvoke("MoveToDestination");
+                moveFunc.Invoke(Card);
                 Destroy(gameObject);
             }
         }

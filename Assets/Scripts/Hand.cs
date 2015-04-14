@@ -8,7 +8,7 @@ namespace Assets.Scripts
 {
     public class Hand : Deck
     {
-        new private List<KeyValuePair<GameObject, Card>> Cards = new List<KeyValuePair<GameObject, Card>>();
+        new public List<KeyValuePair<GameObject, Card>> Cards = new List<KeyValuePair<GameObject, Card>>();
         public GameObject cardPrefab;
 
         public DiscardDeckScript discardPile;
@@ -56,6 +56,8 @@ namespace Assets.Scripts
             {
                 GameObject obj = kvp.Key;
                 Card card = kvp.Value;
+                if (obj == null)
+                    continue;
                 Vector3 pos = obj.transform.position;
                 int i = Cards.IndexOf(kvp);
 

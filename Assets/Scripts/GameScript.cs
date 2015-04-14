@@ -20,9 +20,16 @@ namespace Assets.Scripts
                 CurrentPlayer = 0;
 
             foreach (PlayerScript player in Players)
-                for (int i = player.Hand.Count; i < 3; i++ )
+            {
+                for (int i = player.Hand.Count; i < 3; i++)
                     if (DrawDeck.TopCard != null)
                         DrawDeck.DealCard(player.Hand, player.Hand.AddCard);
+            }
+
+            if (Players[CurrentPlayer].type == PlayerType.AI)
+            {
+                Players[CurrentPlayer].AIPlay();
+            }
         }
     }
 }

@@ -43,4 +43,10 @@ namespace Assets.Scripts
         Reverse,
         Burn
     }
+
+    public enum PlayerType
+    {
+        Human,
+        AI
+    }
 }
