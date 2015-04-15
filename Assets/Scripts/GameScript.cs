@@ -26,6 +26,12 @@ namespace Assets.Scripts
                         DrawDeck.DealCard(player.Hand, player.Hand.AddCard);
             }
 
+            if (Players[CurrentPlayer].Hand.Count <= 0)
+                if (CurrentPlayer == 0)
+                    Application.LoadLevel("Win");
+                else
+                    Application.LoadLevel("Lose");
+
             if (Players[CurrentPlayer].type == PlayerType.AI)
             {
                 Players[CurrentPlayer].AIPlay();

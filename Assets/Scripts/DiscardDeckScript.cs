@@ -17,6 +17,9 @@ namespace Assets.Scripts
             {
                 while (Cards.Count > 0)
                     DrawCard();
+
+                if (player.type == PlayerType.AI)
+                    player.AIPlay();
             }
             else
             {
@@ -27,6 +30,16 @@ namespace Assets.Scripts
                 }
                 Game.EndTurn();
             }
+        }
+
+        public void OnMouseUpAsButton()
+        {
+            PlayerScript player = Game.GetComponent<GameScript>().Players[Game.GetComponent<GameScript>().CurrentPlayer];
+
+            while (TopCard != null)
+                player.Hand.AddCard(DrawCard());
+
+            Game.EndTurn();
         }
     }
 }

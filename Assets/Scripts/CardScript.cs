@@ -53,14 +53,7 @@ namespace Assets.Scripts
                 t = 0;
                 CancelInvoke("MoveToDestination");
                 moveFunc.Invoke(Card);
-				try
-				{
-					Destroy(gameObject);
-				}
-				catch (MissingReferenceException ex)
-				{
-
-				}
+                Destroy(gameObject);
             }
         }
     }
