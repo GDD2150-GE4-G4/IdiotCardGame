@@ -16,35 +16,40 @@ namespace Assets.Scripts
 
         public void AIPlay()
         {
-            try
-            {
-                Card topCard = DiscardPile.TopCard;
-                List<KeyValuePair<GameObject, Card>> playableCards = Hand.Cards.Where(c => c.Value.CanBePlayed(topCard)).ToList();
-                playableCards.Sort((kvp1, kvp2) => kvp1.Value.CompareTo(kvp2.Value));
+			int cardsToPlay = 1;
+			do {
+				try {
+					Card topCard = DiscardPile.TopCard;
+					List<KeyValuePair<GameObject, Card>> playableCards = Hand.Cards.Where (c => c.Value.CanBePlayed (topCard)).ToList ();
+					playableCards.Sort ((kvp1, kvp2) => kvp1.Value.CompareTo (kvp2.Value));
 
-                if (playableCards.Count <= 0)
-                    Hand.drawPile.OnMouseUpAsButton();
-                else if (playableCards[0].Value.Effect == SpecialCard.None)
-                    playableCards[0].Key.GetComponent<CardScript>().OnMouseUpAsButton();
-                else if (playableCards.Exists(kvp => kvp.Value.Effect == SpecialCard.Reverse) && Hand.Cards.Exists(kvp => kvp.Value.Rank <= 5))
-                    playableCards.First(kvp => kvp.Value.Effect == SpecialCard.Reverse).Key.GetComponent<CardScript>().OnMouseUpAsButton();
-                else if (playableCards.Exists(kvp => kvp.Value.Effect == SpecialCard.Reset))
-                    playableCards.First(kvp => kvp.Value.Effect == SpecialCard.Reset).Key.GetComponent<CardScript>().OnMouseUpAsButton();
-                else if (playableCards.Exists(kvp => kvp.Value.Effect == SpecialCard.Burn))
-                    playableCards.First(kvp => kvp.Value.Effect == SpecialCard.Burn).Key.GetComponent<CardScript>().OnMouseUpAsButton();
-                else
-                    playableCards[0].Key.GetComponent<CardScript>().OnMouseUpAsButton();
-            }
-            catch
-            {
-                Hand.Cards.RemoveAll(kvp => kvp.Key == null);
-                foreach (var card in Hand.transform.GetComponentsInChildren<CardScript>())
-                {
-                    if (!Hand.Cards.Exists(kvp => kvp.Key == card.gameObject))
-                        Destroy(card.gameObject);
-                }
-                AIPlay();
-            }
+					if (playableCards.Count <= 0) {
+						Hand.drawPile.OnMouseUpAsButton ();
+					} else if (playableCards [0].Value.Effect == SpecialCard.None)
+						playableCards [0].Key.GetComponent<CardScript> ().OnMouseUpAsButton ();
+					else if (playableCards.Exists (kvp => kvp.Value.Effect == SpecialCard.Reverse) && Hand.Cards.Exists (kvp => kvp.Value.Rank <= 5)) {
+						playableCards.First (kvp => kvp.Value.Effect == SpecialCard.Reverse).Key.GetComponent<CardScript> ().OnMouseUpAsButton ();
+						cardsToPlay++;
+					} else if (playableCards.Exists (kvp => kvp.Value.Effect == SpecialCard.Reset)) {
+						playableCards.First (kvp => kvp.Value.Effect == SpecialCard.Reset).Key.GetComponent<CardScript> ().OnMouseUpAsButton ();
+						cardsToPlay++;
+					} else if (playableCards.Exists (kvp => kvp.Value.Effect == SpecialCard.Burn)) {
+						playableCards.First (kvp => kvp.Value.Effect == SpecialCard.Burn).Key.GetComponent<CardScript> ().OnMouseUpAsButton ();
+						cardsToPlay++;
+					} else {
+						playableCards [0].Key.GetComponent<CardScript> ().OnMouseUpAsButton ();
+						cardsToPlay++;
+					}
+				} catch {
+					Hand.Cards.RemoveAll (kvp => kvp.Key == null);
+					foreach (var card in Hand.transform.GetComponentsInChildren<CardScript>()) {
+						if (!Hand.Cards.Exists (kvp => kvp.Key == card.gameObject))
+							Destroy (card.gameObject);
+					}
+					AIPlay ();
+				}
+				cardsToPlay--;
+			} while (cardsToPlay > 0);
         }
     }
 }
