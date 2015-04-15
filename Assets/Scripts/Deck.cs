@@ -88,8 +88,9 @@ namespace Assets.Scripts
             }
         }
 
-        void Shuffle(int iterations = 1)
+        void Shuffle()
         {
+			int iterations = 1;
             for (int i = 0; i < iterations; i++)
             {
                 var cards = Cards.ToList<Card>();

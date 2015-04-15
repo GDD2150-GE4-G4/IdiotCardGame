@@ -6,7 +6,7 @@ using System;
 public class Card : IComparable<Card>, IEquatable<Card> {
 
 	private Material myMaterial = null;
-	private ushort myValue = 0;
+	private CardType myValue = 0;
 	private bool myIsFaceUp = true;
 	private SpecialCardAction myAction = SpecialCardAction.None;
 
@@ -20,12 +20,12 @@ public class Card : IComparable<Card>, IEquatable<Card> {
 		myMaterial = inMaterial;
 	}
 	
-	public ushort GetValue()
+	public CardType GetValue()
 	{
 		return myValue;
 	}
 	
-	public void SetValue(ushort inValue)
+	public void SetValue(CardType inValue)
 	{
 		myValue = inValue;
 	}
