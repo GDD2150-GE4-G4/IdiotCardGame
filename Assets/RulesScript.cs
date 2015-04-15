@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameState : MonoBehaviour {
+public class RulesScript : MonoBehaviour {
 
-	private Deck myDeck;
-	private Dealer myDealer;
+	public void OnButtonPress(){
+		Application.LoadLevel ("MainMenu");
+	}
 
 	// Use this for initialization
 	void Start () {
-		myDeck = new Deck ();
-		myDealer = new Dealer (myDeck);
+	
 	}
 	
 	// Update is called once per frame
